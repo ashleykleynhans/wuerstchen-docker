@@ -25,7 +25,7 @@ def get_wuerstchen_pipelines():
     }
 
     auto_pipe = fetch_pretrained_model(AutoPipelineForText2Image,
-                                       "warp-ai/wuerstchen", **common_args)
+                                       "warp-diffusion/wuerstchen", **common_args)
 
     return auto_pipe
 
