@@ -28,7 +28,6 @@ then
 else
     mkdir -p /workspace/logs
     echo "Starting Wuerstchen"
-    export HF_HOME="/workspace"
     source /workspace/venv/bin/activate
     cd /workspace/wuerstchen
     export GRADIO_SERVER_NAME="0.0.0.0"
