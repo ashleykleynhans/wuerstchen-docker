@@ -13,7 +13,7 @@
 
 This image is designed to work on [RunPod](https://runpod.io?ref=2xxro4sy).
 You can use my custom [RunPod template](
-https://runpod.io/gsc?template=pxpldkhq6u&ref=2xxro4sy)
+https://runpod.io/gsc?template=4n55rha19f&ref=2xxro4sy)
 to launch it on RunPod.
 
 ## Running Locally
@@ -39,7 +39,7 @@ You can obviously substitute the image name and tag with your own.
 
 ## Community and Contributing
 
-Pull requests and issues on [GitHub](https://github.com/ashleykleynhans/facefusion-docker)
+Pull requests and issues on [GitHub](https://github.com/ashleykleynhans/wuerstchen-docker)
 are welcome. Bug fixes and new features are encouraged.
 
 You can contact me and get help with deploying your container
