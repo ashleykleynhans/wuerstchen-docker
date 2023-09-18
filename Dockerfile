@@ -80,6 +80,13 @@ RUN source /venv/bin/activate && \
     pip3 install -r requirements.txt && \
     deactivate
 
+# Cache the models
+COPY cache_models.py /cache_models.py
+RUN source /venv/bin/activate && \
+    python3 /cache_models.py && \
+    rm /cache_models.py && \
+    deactivate
+
 # Install Jupyter
 RUN pip3 install -U --no-cache-dir jupyterlab \
         jupyterlab_widgets \
