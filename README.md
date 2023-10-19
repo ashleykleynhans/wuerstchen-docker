@@ -8,6 +8,7 @@
 * [Würstchen](
   https://github.com/dome272/wuerstchen/)
 * Torch 2.0.1
+* xfomers 0.0.22
 
 ## Available on RunPod
 

@@ -59,16 +59,16 @@ RUN apt update && \
 RUN ln -s /usr/bin/python3.10 /usr/bin/python
 
 # Install Torch and xformers
-RUN pip3 install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 && \
-    pip3 install --no-cache-dir xformers==0.0.21
+RUN pip3 install --no-cache-dir torch==2.0.1 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 && \
+    pip3 install --no-cache-dir xformers==0.0.22
 
-# Stage 2: Install FaceFusion and python modules
+# Stage 2: Install Wuerstchen and python modules
 FROM base as setup
 
 # Create and use the Python venv
-RUN python3 -m venv /venv
+RUN python3 -m venv --system-site-packages /venv
 
-# Clone the git repo of FaceFusion and set version
+# Clone the git repo of Wuerstchen and set version
 WORKDIR /
 RUN git clone https://huggingface.co/spaces/warp-ai/Wuerstchen /wuerstchen && \
     cd /wuerstchen && \
@@ -103,9 +103,9 @@ RUN wget https://github.com/runpod/runpodctl/releases/download/v1.10.0/runpodctl
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/502.html /usr/share/nginx/html/502.html
 
-# Set up the container startup script
+# Copy the scripts
 WORKDIR /
-COPY --chmod=755 pre_start.sh start.sh fix_venv.sh ./
+COPY --chmod=755 scripts/* ./
 
 # Start the container
 SHELL ["/bin/bash", "--login", "-c"]
