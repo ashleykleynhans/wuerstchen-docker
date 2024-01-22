@@ -1,7 +1,9 @@
 # Stage 1: Base
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04 as base
 
-ARG WUERSTCHEN_COMMIT=c310ea37abea4bf5f4a4aad975c10c6fcfeb6963
+ARG WUERSTCHEN_COMMIT=581f42277a9d55fad878cf5cf2f878bc0f990d80
+ARG TORCH_VERSION=2.0.1
+ARG XFORMERS_VERSION=0.0.22
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -59,8 +61,8 @@ RUN apt update && \
 RUN ln -s /usr/bin/python3.10 /usr/bin/python
 
 # Install Torch and xformers
-RUN pip3 install --no-cache-dir torch==2.0.1 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 && \
-    pip3 install --no-cache-dir xformers==0.0.22
+RUN pip3 install --no-cache-dir torch==${TORCH_VERSION} torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 && \
+    pip3 install --no-cache-dir xformers==${XFORMERS_VERSION}
 
 # Stage 2: Install Wuerstchen and python modules
 FROM base as setup
@@ -111,5 +113,6 @@ WORKDIR /
 COPY --chmod=755 scripts/* ./
 
 # Start the container
+ENV TEMPLATE_VERSION=1.0.1
 SHELL ["/bin/bash", "--login", "-c"]
 CMD [ "/start.sh" ]
