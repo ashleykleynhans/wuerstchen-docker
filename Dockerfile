@@ -80,6 +80,7 @@ RUN git clone https://huggingface.co/spaces/warp-ai/Wuerstchen /wuerstchen && \
 WORKDIR /wuerstchen
 RUN source /venv/bin/activate && \
     pip3 install -r requirements.txt && \
+    pip3 install itsdangerous && \
     deactivate
 
 # Cache the models
