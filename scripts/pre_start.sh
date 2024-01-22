@@ -19,6 +19,10 @@ sync_apps() {
     echo "Syncing Wuerstchen to workspace, please wait..."
     rsync --remove-source-files -rlptDu /wuerstchen/ /workspace/wuerstchen/
 
+    # Sync hf-home to workspace
+    echo "Syncing hf-home to workspace, please wait..."
+    rsync --remove-source-files -rlptDu /hf-home/ /workspace/hf-home/
+
     echo "${TEMPLATE_VERSION}" > /workspace/template_version
 }
 
@@ -49,6 +53,7 @@ then
     echo "   deactivate && source /workspace/venv/bin/activate"
     echo "   export GRADIO_SERVER_NAME=\"0.0.0.0\""
     echo "   export GRADIO_SERVER_PORT=\"3001\""
+    echo "   export HF_HOME=\"/workspace\""
     echo "   python3 app.py"
 else
     mkdir -p /workspace/logs
@@ -57,6 +62,7 @@ else
     cd /workspace/wuerstchen
     export GRADIO_SERVER_NAME="0.0.0.0"
     export GRADIO_SERVER_PORT="3001"
+    export HF_HOME="/workspace/hf-home"
     nohup python3 app.py > /workspace/logs/wuerstchen.log 2>&1 &
     echo "Wuerstchen started"
     echo "Log file: /workspace/logs/wuerstchen.log"

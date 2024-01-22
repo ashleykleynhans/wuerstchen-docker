@@ -83,6 +83,7 @@ RUN source /venv/bin/activate && \
     deactivate
 
 # Cache the models
+ENV HF_HOME=/hf-home
 COPY cache_models.py /cache_models.py
 RUN source /venv/bin/activate && \
     python3 /cache_models.py && \
